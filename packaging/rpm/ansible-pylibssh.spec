@@ -43,9 +43,8 @@ Source2: %{pypi_source build 0.3.1.post1}
 Source3: %{pypi_source Cython 0.29.32}
 Source4: %{pypi_source packaging 20.9}
 Source5: %{pypi_source setuptools 56.0.0}
-Source6: %{pypi_source setuptools_scm 6.0.1}
-Source7: %{pypi_source setuptools_scm_git_archive 1.4}
-Source8: %{pypi_source toml 0.10.2}
+Source6: %{pypi_source setuptools_scm 8.1.0}
+Source8: %{pypi_source tomli 2.0.1}
 Source9: %{pypi_source pep517 0.10.0}
 Source10: %{pypi_source pip 21.1.1}
 Source11: %{pypi_source pyparsing 2.4.7}
@@ -53,7 +52,7 @@ Source11: %{pypi_source pyparsing 2.4.7}
 %if 0%{?centos} == 0
 Source12: %{pypi_source importlib_metadata 4.0.1}
 Source13: %{pypi_source zipp 3.4.1}
-Source14: %{pypi_source typing_extensions 3.10.0.0}
+Source14: %{pypi_source typing_extensions 4.12.2}
 %endif
 Source15: %{pypi_source pytest 6.2.4}
 Source16: %{pypi_source pytest-cov 2.12.1}
@@ -145,11 +144,14 @@ PYTHONPATH="$(pwd)/bin" \
 PYTHONPATH="$(pwd)/bin" \
 %{__python3} -m pip install --no-deps -t bin %{SOURCE5}
 PYTHONPATH="$(pwd)/bin" \
-%{__python3} -m pip install --no-deps -t bin %{SOURCE6} --no-build-isolation
-PYTHONPATH="$(pwd)/bin" \
-%{__python3} -m pip install --no-deps -t bin %{SOURCE7}
+%{__python3} -m pip install --no-deps -t bin %{SOURCE6}
 PYTHONPATH="$(pwd)/bin" \
 %{__python3} -m pip install --no-deps -t bin %{SOURCE8}
+# RHEL specifically, not CentOS:
+%if 0%{?centos} == 0
+PYTHONPATH="$(pwd)/bin" \
+%{__python3} -m pip install --no-deps -t bin %{SOURCE14}
+%endif
 PYTHONPATH="$(pwd)/bin" \
 %{__python3} -m pip install --no-deps -t bin %{SOURCE11}
 # RHEL specifically, not CentOS:
@@ -158,8 +160,6 @@ PYTHONPATH="$(pwd)/bin" \
 %{__python3} -m pip install --no-deps -t bin %{SOURCE12}
 PYTHONPATH="$(pwd)/bin" \
 %{__python3} -m pip install --no-deps -t bin %{SOURCE13}
-PYTHONPATH="$(pwd)/bin" \
-%{__python3} -m pip install --no-deps -t bin %{SOURCE14}
 %endif
 PYTHONPATH="$(pwd)/bin" \
 %{__python3} -m pip install --no-deps -t bin %{SOURCE15}
