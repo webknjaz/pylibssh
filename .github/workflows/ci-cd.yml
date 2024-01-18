@@ -486,7 +486,7 @@ jobs:
       shell: bash
     - name: Generate changelog draft to a temporary file [DEBUG]
       run: >-
-        .tox/changelog/bin/python
+        2>/dev/null .tox/changelog/bin/python
         -m towncrier.build
         --version '[UNRELEASED DRAFT]'
         --draft
