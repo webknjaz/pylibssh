@@ -484,6 +484,13 @@ jobs:
         tee
         '${{ needs.pre-setup.outputs.changelog-draft-name-rst }}'
       shell: bash
+    - name: Generate changelog draft to a temporary file [DEBUG]
+      run: >-
+        .tox/changelog/bin/python
+        -m towncrier.build
+        --version '[UNRELEASED DRAFT]'
+        --draft
+      shell: bash
     - name: Sanitize the markdown changelog version
       run: >-
         sed
