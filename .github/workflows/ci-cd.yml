@@ -491,6 +491,42 @@ jobs:
         --version '[UNRELEASED DRAFT]'
         --draft
       shell: bash
+    - name: Generate changelog draft to a temporary file [DEBUG][devnull]
+      run: >-
+        2>/dev/null
+        python -m
+        tox
+        --skip-missing-interpreters false
+        --skip-pkg-install
+        -e draft-changelog
+        -qq
+      shell: bash
+    - name: Generate changelog draft to a temporary file [DEBUG]
+      run: >-
+        python -m
+        tox
+        --skip-missing-interpreters false
+        --skip-pkg-install
+        -e draft-changelog
+        -qq
+      shell: bash
+    - name: Generate changelog draft to a temporary file [DEBUG][non-silent]
+      run: >-
+        python -m
+        tox
+        --skip-missing-interpreters false
+        --skip-pkg-install
+        -e draft-changelog
+      shell: bash
+    - name: Generate changelog draft to a temporary file [DEBUG][crazy-verbose]
+      run: >-
+        python -m
+        tox
+        --skip-missing-interpreters false
+        --skip-pkg-install
+        -e draft-changelog
+        -vvvvv
+      shell: bash
     - name: Sanitize the markdown changelog version
       run: >-
         sed
