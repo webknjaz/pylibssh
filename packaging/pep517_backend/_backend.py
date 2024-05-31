@@ -209,8 +209,8 @@ def _exclude_dir_path(
         if excluded_dir_path == Path(visited_directory) / subdir
     ]
     if visited_directory_subdirs_to_ignore:
-        print(
-            f'Preventing `{excluded_dir_path !s}` from being '
+        print(  # noqa: WPS421
+            f'Preventing `{excluded_dir_path !s}` from being '  # noqa: WPS305
             'copied into itself recursively...',
             file=_standard_error_stream,
         )
@@ -222,14 +222,14 @@ def _in_temporary_directory(src_dir: Path) -> t.Iterator[None]:
     with TemporaryDirectory(prefix='.tmp-ansible-pylibssh-pep517-') as tmp_dir:
         tmp_dir_path = Path(tmp_dir)
         root_tmp_dir_path = tmp_dir_path.parent
-        _exclude_tmpdir_parent = partial(_exclude_dir_path, root_tmp_dir_path)
+        exclude_tmpdir_parent = partial(_exclude_dir_path, root_tmp_dir_path)
 
         with chdir_cm(tmp_dir):
             tmp_src_dir = tmp_dir_path / 'src'
             copytree(
                 src_dir,
                 tmp_src_dir,
-                ignore=_exclude_tmpdir_parent,
+                ignore=exclude_tmpdir_parent,
                 symlinks=True,
             )
             os.chdir(tmp_src_dir)
