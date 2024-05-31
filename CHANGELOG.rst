@@ -8,7 +8,7 @@ Changelog
     fix problems like typo corrections or such.
     To add a new change log entry, please see
     https://pip.pypa.io/en/latest/development/contributing/#news-entries
-    we named the news folder "changes".
+    we named the news folder "docs/changelog-fragments/".
 
     WARNING: Don't drop the next directive!
 
