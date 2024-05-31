@@ -31,7 +31,7 @@ Pre-release activities
    It should not target core contributors as the information
    they are normally interested in is already present in the
    Git history.
-   Update the changelog fragments if you see any prolems with
+   Update the changelog fragments if you see any problems with
    this changelog section.
 3. Optionally, test the previously published nightlies, that are
    available through :ref:`Continuous delivery`, locally.
@@ -78,10 +78,12 @@ The release stage
    abort the process.
 7. Approve the deployment and wait for the workflow to complete.
 8. Verify that the following things got created:
+
    - a PyPI release
    - a Git tag
    - a GitHub Releases page
    - a GitHub Discussions page
+
 9. Tell everyone you released a new version of |project| :)
 
 
