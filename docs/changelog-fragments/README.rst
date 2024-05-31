@@ -108,4 +108,4 @@ File ``docs/changelog-fragments/57.bugfix.rst``:
    (``tool.towncrier.type``).
 
 .. _Towncrier philosophy:
-   https://towncrier.readthedocs.io/en/actual-freaking-docs/#philosophy
+   https://towncrier.readthedocs.io/en/stable/#philosophy
