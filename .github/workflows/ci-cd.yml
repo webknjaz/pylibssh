@@ -614,7 +614,7 @@ jobs:
     strategy:
       matrix:
         os:
-        - macos
+        - macos-13
     uses: ./.github/workflows/reusable-cibuildwheel.yml
     with:
       os: ${{ matrix.os }}
@@ -1407,7 +1407,7 @@ jobs:
         - 3.7
         - 3.6
         runner-vm-os:
-        - macos-latest
+        - macos-13
         dist-type:
         - binary
         - source
