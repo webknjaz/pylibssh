@@ -20,7 +20,7 @@ repos:
     types: [file]
 
 - repo: https://github.com/Lucas-C/pre-commit-hooks.git
-  rev: v1.5.4
+  rev: v1.5.5
   hooks:
   - id: remove-tabs
 
@@ -75,7 +75,7 @@ repos:
       ^docs/_samples/.*\.py$
 
 - repo: https://github.com/adrienverge/yamllint.git
-  rev: v1.33.0
+  rev: v1.35.1
   hooks:
   - id: yamllint
     files: \.(yaml|yml)$
@@ -84,7 +84,7 @@ repos:
     - --strict
 
 - repo: https://github.com/PyCQA/flake8.git
-  rev: 6.1.0
+  rev: 7.0.0
   hooks:
   - id: flake8
     alias: flake8-no-wps
@@ -103,8 +103,7 @@ repos:
     - file
 
 - repo: https://github.com/PyCQA/flake8.git
-  # NOTE: This is kept at v4 for until WPS starts supporting flake v5.
-  rev: 4.0.1  # enforce-version: 4.0.1
+  rev: 7.0.0
   hooks:
   - id: flake8
     alias: flake8-only-wps
@@ -116,7 +115,7 @@ repos:
     - --select
     - WPS
     additional_dependencies:
-    - wemake-python-styleguide ~= 0.17.0
+    - wemake-python-styleguide ~= 0.19.2
     exclude: >-
       ^docs/_samples/.*\.py$
     files: >-
@@ -199,37 +198,5 @@ repos:
 #     files: \.py$
 #     entry: python -m pylint
 #     args: []
-
-- repo: local
-  hooks:
-  - id: enforced-flake8-version
-    name: Verify that enforced flake8 version stays unchanged
-    description: >-
-      This is a sanity check and fixer that makes sure that
-      the `flake8` version in this file remains matching the
-      corresponding request in the `# enforce-version` comment.
-    # Using Python here because using
-    # shell test does not always work in CIs:
-    entry: >-
-      python -c 'import pathlib, re, sys;
-      pre_commit_config = pathlib.Path(sys.argv[1]);
-      cfg_txt = pre_commit_config.read_text();
-      new_cfg_txt = re.sub(
-      r"(?P<spaces>\s+)rev:\s(?:\d+\.\d+\.\d+)\s{0,2}"
-      r"#\senforce-version:\s(?P<enforced_version>\d+\.\d+\.\d+)"
-      r"[ \t\f\v]*",
-      r"\g<spaces>rev: \g<enforced_version>  "
-      r"# enforce-version: \g<enforced_version>",
-      cfg_txt,
-      );
-      cfg_txt != new_cfg_txt and
-      pre_commit_config.write_text(new_cfg_txt)
-      '
-    pass_filenames: true
-    language: system
-    files: >-
-      ^\.pre-commit-config\.ya?ml$
-    types:
-    - yaml
 
 ...
