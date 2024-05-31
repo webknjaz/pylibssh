@@ -63,7 +63,7 @@ default_role = 'any'
 nitpicky = True
 nitpick_ignore = [
     ('envvar', 'PATH'),
-    ('envvar', 'TMPPATH'),
+    ('envvar', 'TMPDIR'),
 ]
 
 # Add any Sphinx extension module names here, as strings. They can be
