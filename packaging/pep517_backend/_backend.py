@@ -197,8 +197,8 @@ def patched_dist_get_long_description():
 def _exclude_dir_path(
     excluded_dir_path: Path,
     visited_directory: str,
-    _visited_dir_contents: list[str],
-) -> list[str]:
+    _visited_dir_contents: 'list[str]',
+) -> 'list[str]':
     """Prevent recursive directory traversal."""
     # This stops the temporary directory from being copied
     # into self recursively forever.
