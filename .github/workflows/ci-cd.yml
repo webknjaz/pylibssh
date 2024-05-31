@@ -1351,7 +1351,7 @@ jobs:
           ~/rpmbuild/RPMS/
 
   test-linux:
-    name: 🧪 Test${{ '' }}
+    name: 🧪 Test${{ '' }}  # nest jobs under the same sidebar category
     needs:
     - build-bin-manylinux-tested-arches
     - build-src
@@ -1391,7 +1391,7 @@ jobs:
         ${{ needs.pre-setup.outputs.dists-artifact-name }}
 
   test-macos:
-    name: 🧪 Test${{ '' }}
+    name: 🧪 Test${{ '' }}  # nest jobs under the same sidebar category
     needs:
     - build-bin-macos
     - build-src
