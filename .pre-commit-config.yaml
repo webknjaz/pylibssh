@@ -121,7 +121,7 @@ repos:
       ^docs/_samples/.*\.py$
     files: >-
       ^.*\.p(xd|y|yx)$
-    language_version: python3
+    language_version: python3.11  # flake8-commas doesn't work w/ Python 3.12
     types:
     - file
 
