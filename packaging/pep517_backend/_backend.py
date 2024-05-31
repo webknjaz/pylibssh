@@ -10,6 +10,7 @@ from contextlib import contextmanager, suppress
 from functools import partial
 from pathlib import Path
 from shutil import copytree
+from sys import stderr as _standard_error_stream
 from sys import version_info as _python_version_tuple
 from tempfile import TemporaryDirectory
 
