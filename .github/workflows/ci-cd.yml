@@ -682,7 +682,7 @@ jobs:
     strategy:
       matrix:
         os:
-        - ubuntu
+        - ubuntu-latest
     uses: ./.github/workflows/reusable-cibuildwheel.yml
     with:
       os: ${{ matrix.os }}
