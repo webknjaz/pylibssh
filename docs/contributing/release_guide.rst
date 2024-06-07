@@ -74,8 +74,31 @@ The release stage
    - a Git tag
    - a GitHub Releases page
    - a GitHub Discussions page
+   - a GitHub pull request
 
-9. Tell everyone you released a new version of |project| :)
+9. Merge the release pull request containing the changelog
+   update patch. Use the natural/native merge strategy.
+
+   .. danger::
+
+      **Do not** use squash or rebase. The ``release/vNUMBER``
+      branch contains a tagged commit. That commit must become
+      a part of the repository's default branch. Failing to
+      follow this instruction will result in ``setuptools-scm``
+      getting confused and generating the intermediate commit
+      versions incorrectly.
+
+   .. tip::
+
+      If you used a YOLO mode when triggering the release
+      automation, the branch protection rules may prevent you
+      from being able to click the merge button. In such a case
+      it is okay to *temporarily* deselect the :guilabel:`Do not
+      allow bypassing the above settings` setting in the branch
+      protection configuration, click the merge button, with an
+      administrator override and re-check it immediately.
+
+10. Tell everyone you released a new version of |project| :)
 
 
 .. _GitHub Actions CI/CD workflow:
