@@ -258,5 +258,6 @@ jobs:
           Py-${{
             steps.python-install.outputs.python-version
           }}
+        token: ${{ secrets.CODECOV_TOKEN }}
 
 ...
