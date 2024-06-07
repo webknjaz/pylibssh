@@ -1540,7 +1540,7 @@ jobs:
     - check
     - pre-setup  # transitive, for accessing settings
     if: >-
-      always()
+      !cancelled()
       && ! (
         contains(needs.*.result, 'skipped')
         || contains(needs.*.result, 'failure')
@@ -1575,7 +1575,7 @@ jobs:
     - check
     - pre-setup  # transitive, for accessing settings
     if: >-
-      always()
+      !cancelled()
       && ! (
         contains(needs.*.result, 'skipped')
         || contains(needs.*.result, 'failure')
@@ -1806,7 +1806,7 @@ jobs:
     - check
     - pre-setup  # transitive, for accessing settings
     if: >-
-      always()
+      !cancelled()
       && ! (
         contains(needs.*.result, 'skipped')
         || contains(needs.*.result, 'failure')
