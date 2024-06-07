@@ -1619,7 +1619,15 @@ jobs:
       && needs.publish-pypi.result == 'success'
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write  # Mandatory for `git push` to work
+
     steps:
+    - name: Fetch the src snapshot  # IMPORTANT: Must be before the tag check
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 2
+        ref: ${{ github.event.inputs.release-committish }}
     - name: >-
         Check if the requested tag ${{ needs.pre-setup.outputs.git-tag }}
         is present and is pointing at the required commit ${{
@@ -1627,25 +1635,39 @@ jobs:
         }}
       id: existing-remote-tag-check
       run: |
+        set -eEuo pipefail
+
         REMOTE_TAGGED_COMMIT_SHA="$(
           git ls-remote --tags --refs $(git remote get-url origin) '${{
             needs.pre-setup.outputs.git-tag
           }}' | awk '{print $1}'
         )"
 
-        if [[ "${REMOTE_TAGGED_COMMIT_SHA}" == '${{
-          github.event.inputs.release-committish
-        }}' ]]
+        # NOTE: Since we're making a new change log commit on top of the one
+        # NOTE: that is the release workflow trigger, it'll be the one that's
+        # NOTE: tagged if the workflow run succeeded previously. So we need to
+        # NOTE: grab its parent for comparison, since new workflow runs will
+        # NOTE: generate a new changelog update commit and while its diff and
+        # NOTE: the parent may be the same, the metadata like the timestamp
+        # NOTE: would differ causing it to have a different commit SHA. But the
+        # NOTE: parent would be immutable so that's what we'll compare to the
+        # NOTE: release committish.
+        if [[ "${REMOTE_TAGGED_COMMIT_SHA}" == '' ]]
+        then
+          LAST_HUMAN_COMMIT_SHA=
+        else
+          LAST_HUMAN_COMMIT_SHA=$(git rev-parse "${REMOTE_TAGGED_COMMIT_SHA}"^)
+        fi
+
+        RELEASE_REQUEST_COMMIT_SHA=$(git rev-parse '${{
+          github.event.inputs.release-committish || 'HEAD'
+        }}')
+
+        if [[ "${LAST_HUMAN_COMMIT_SHA}" == "${RELEASE_REQUEST_COMMIT_SHA}" ]]
         then
           echo "already-exists=true" >> "${GITHUB_OUTPUT}"
         fi
 
-    - name: Fetch the src snapshot
-      if: steps.existing-remote-tag-check.outputs.already-exists != 'true'
-      uses: actions/checkout@v4.1.6
-      with:
-        fetch-depth: 1
-        ref: ${{ github.event.inputs.release-committish }}
     - name: Setup git user as [bot]
       if: steps.existing-remote-tag-check.outputs.already-exists != 'true'
       # Refs:
