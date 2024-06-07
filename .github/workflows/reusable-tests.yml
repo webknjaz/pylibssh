@@ -39,6 +39,10 @@ on:  # yamllint disable-line rule:truthy
         default: 'false'
         required: false
         type: string
+    secrets:
+      codecov-token:
+        description: Mandatory token for uploading to Codecov
+        required: true
 
 env:
   FORCE_COLOR: 1  # Request colored output from CLI tools supporting it
@@ -258,6 +262,6 @@ jobs:
           Py-${{
             steps.python-install.outputs.python-version
           }}
-        token: ${{ secrets.CODECOV_TOKEN }}
+        token: ${{ secrets.codecov-token }}
 
 ...
