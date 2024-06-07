@@ -82,8 +82,7 @@ profile = "True"
   issue_format = "{issue}"
   package_dir = "src"
   template = "docs/changelog-fragments/template.j2"
-  title_format = "v{version} ({project_date})"
-  underlines = ["=", "^", "-", "~"]
+  title_format = "v{version}"
 
   # NOTE: The types are declared because:
   # NOTE: - there is no mechanism to override just the value of
