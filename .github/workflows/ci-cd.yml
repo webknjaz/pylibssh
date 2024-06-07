@@ -1541,7 +1541,10 @@ jobs:
     - pre-setup  # transitive, for accessing settings
     if: >-
       always()
-      && needs.check.result == 'success'
+      && ! (
+        contains(needs.*.result, 'skipped')
+        || contains(needs.*.result, 'failure')
+      )
       && fromJSON(needs.pre-setup.outputs.release-requested)
     runs-on: ubuntu-latest
 
@@ -1573,7 +1576,10 @@ jobs:
     - pre-setup  # transitive, for accessing settings
     if: >-
       always()
-      && needs.check.result == 'success'
+      && ! (
+        contains(needs.*.result, 'skipped')
+        || contains(needs.*.result, 'failure')
+      )
       && (
         fromJSON(needs.pre-setup.outputs.is-untagged-devel)
         || fromJSON(needs.pre-setup.outputs.release-requested)
@@ -1612,7 +1618,10 @@ jobs:
     - pre-setup  # transitive, for accessing settings
     if: >-
       always()
-      && needs.publish-pypi.result == 'success'
+      && ! (
+        contains(needs.*.result, 'skipped')
+        || contains(needs.*.result, 'failure')
+      )
     runs-on: ubuntu-latest
 
     steps:
@@ -1706,7 +1715,10 @@ jobs:
     - pre-setup  # transitive, for accessing settings
     if: >-
       always()
-      && needs.post-release-repo-update.result == 'success'
+      && ! (
+        contains(needs.*.result, 'skipped')
+        || contains(needs.*.result, 'failure')
+      )
     runs-on: ubuntu-latest
 
     permissions:
@@ -1795,7 +1807,10 @@ jobs:
     - pre-setup  # transitive, for accessing settings
     if: >-
       always()
-      && needs.check.result == 'success'
+      && ! (
+        contains(needs.*.result, 'skipped')
+        || contains(needs.*.result, 'failure')
+      )
       && (
         fromJSON(needs.pre-setup.outputs.is-untagged-devel) ||
         fromJSON(needs.pre-setup.outputs.release-requested)
