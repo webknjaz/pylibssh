@@ -39,6 +39,10 @@ on:  # yamllint disable-line rule:truthy
         default: 'false'
         required: false
         type: string
+    secrets:
+      codecov-token:
+        description: Mandatory token for uploading to Codecov
+        required: true
 
 env:
   FORCE_COLOR: 1  # Request colored output from CLI tools supporting it
@@ -244,7 +248,7 @@ jobs:
         && exit 1
       shell: bash
     - name: Send coverage data to Codecov
-      uses: codecov/codecov-action@v3.1.5
+      uses: codecov/codecov-action@v4.4.1
       with:
         files: .test-results/pytest/cov.xml
         flags: >-
@@ -258,5 +262,6 @@ jobs:
           Py-${{
             steps.python-install.outputs.python-version
           }}
+        token: ${{ secrets.codecov-token }}
 
 ...
