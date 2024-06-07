@@ -17,6 +17,11 @@ on:  # yamllint disable-line rule:truthy
   pull_request:
     paths-ignore:  # NOTE: cannot be combined with "paths"
     - docs/**.rst
+    types:
+    - opened  # default
+    - synchronize  # default
+    - reopened  # default
+    - ready_for_review  # used in PRs created from the release workflow
   workflow_dispatch:
     inputs:
       release-version:
@@ -1737,6 +1742,7 @@ jobs:
           Automated changelog generation with the version
           ${{ needs.pre-setup.outputs.dist-version }}.
         PULL_REQUEST_BRANCH: ${{ github.event.repository.default_branch }}
+        PULL_REQUEST_DRAFT: true
         PULL_REQUEST_FROM_BRANCH: >-
           release/${{ needs.pre-setup.outputs.dist-version }}
         PULL_REQUEST_TITLE: >-
@@ -1745,6 +1751,14 @@ jobs:
       run: |
         echo "PR number: ${{ steps.pr.outputs.pull_request_number }}"
         echo "PR URL: ${{ steps.pr.outputs.pull_request_url }}"
+    - name: Instruct the maintainers to trigger CI by undrafting the PR
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      run: >-
+        gh pr comment
+        --body 'Please mark the PR as ready for review to trigger PR checks.'
+        --repo '${{ github.repository }}'
+        '${{ steps.pr.outputs.pull_request_number }}'
 
   publish-github-release:
     name: >-
