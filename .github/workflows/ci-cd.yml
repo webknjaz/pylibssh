@@ -154,7 +154,7 @@ jobs:
         ${{ steps.changelog-draft-name.outputs.filename-base }}.rst
     steps:
     - name: Switch to using Python 3.11 by default
-      uses: actions/setup-python@v5.0.0
+      uses: actions/setup-python@v5.1.0
       with:
         python-version: 3.11
     - name: >-
@@ -206,7 +206,7 @@ jobs:
     - name: Check out src from Git
       if: >-
         steps.request-check.outputs.release-requested != 'true'
-      uses: actions/checkout@v4.1.1
+      uses: actions/checkout@v4.1.6
       with:
         fetch-depth: >-
           ${{
@@ -427,12 +427,12 @@ jobs:
 
     steps:
     - name: Switch to using Python 3.11
-      uses: actions/setup-python@v5.0.0
+      uses: actions/setup-python@v5.1.0
       with:
         python-version: 3.11
 
     - name: Grab the source from Git
-      uses: actions/checkout@v4.1.1
+      uses: actions/checkout@v4.1.6
       with:
         fetch-depth: 1  # Enough for this job to generate the changelog
         ref: ${{ github.event.inputs.release-committish }}
@@ -874,12 +874,12 @@ jobs:
 
     steps:
     - name: Switch to using Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5.0.0
+      uses: actions/setup-python@v5.1.0
       with:
         python-version: ${{ matrix.python-version }}
 
     - name: Grab the source from Git
-      uses: actions/checkout@v4.1.1
+      uses: actions/checkout@v4.1.6
       with:
         fetch-depth: >-
           ${{
@@ -1444,7 +1444,7 @@ jobs:
 
     steps:
     - name: Switch to using Python 3.11 by default
-      uses: actions/setup-python@v5.0.0
+      uses: actions/setup-python@v5.1.0
       with:
         python-version: 3.11
 
@@ -1540,7 +1540,12 @@ jobs:
     - check
     - pre-setup  # transitive, for accessing settings
     if: >-
-      fromJSON(needs.pre-setup.outputs.release-requested)
+      !cancelled()
+      && ! (
+        contains(needs.*.result, 'skipped')
+        || contains(needs.*.result, 'failure')
+      )
+      && fromJSON(needs.pre-setup.outputs.release-requested)
     runs-on: ubuntu-latest
 
     environment:
@@ -1570,8 +1575,15 @@ jobs:
     - check
     - pre-setup  # transitive, for accessing settings
     if: >-
-      fromJSON(needs.pre-setup.outputs.is-untagged-devel)
-      || fromJSON(needs.pre-setup.outputs.release-requested)
+      !cancelled()
+      && ! (
+        contains(needs.*.result, 'skipped')
+        || contains(needs.*.result, 'failure')
+      )
+      && (
+        fromJSON(needs.pre-setup.outputs.is-untagged-devel)
+        || fromJSON(needs.pre-setup.outputs.release-requested)
+      )
     runs-on: ubuntu-latest
 
     environment:
@@ -1604,6 +1616,12 @@ jobs:
     needs:
     - publish-pypi
     - pre-setup  # transitive, for accessing settings
+    if: >-
+      always()
+      && ! (
+        contains(needs.*.result, 'skipped')
+        || contains(needs.*.result, 'failure')
+      )
     runs-on: ubuntu-latest
 
     steps:
@@ -1629,7 +1647,7 @@ jobs:
 
     - name: Fetch the src snapshot
       if: steps.existing-remote-tag-check.outputs.already-exists != 'true'
-      uses: actions/checkout@v4.1.1
+      uses: actions/checkout@v4.1.6
       with:
         fetch-depth: 1
         ref: ${{ github.event.inputs.release-committish }}
@@ -1695,6 +1713,12 @@ jobs:
     needs:
     - post-release-repo-update
     - pre-setup  # transitive, for accessing settings
+    if: >-
+      always()
+      && ! (
+        contains(needs.*.result, 'skipped')
+        || contains(needs.*.result, 'failure')
+      )
     runs-on: ubuntu-latest
 
     permissions:
@@ -1782,8 +1806,15 @@ jobs:
     - check
     - pre-setup  # transitive, for accessing settings
     if: >-
-      fromJSON(needs.pre-setup.outputs.is-untagged-devel) ||
-      fromJSON(needs.pre-setup.outputs.release-requested)
+      !cancelled()
+      && ! (
+        contains(needs.*.result, 'skipped')
+        || contains(needs.*.result, 'failure')
+      )
+      && (
+        fromJSON(needs.pre-setup.outputs.is-untagged-devel) ||
+        fromJSON(needs.pre-setup.outputs.release-requested)
+      )
     runs-on: ubuntu-latest
 
     environment:
@@ -1815,7 +1846,7 @@ jobs:
         path: dist/
 
     - name: Switch to Python 3.11
-      uses: actions/setup-python@v5.0.0
+      uses: actions/setup-python@v5.1.0
       with:
         python-version: 3.11
     - name: >-

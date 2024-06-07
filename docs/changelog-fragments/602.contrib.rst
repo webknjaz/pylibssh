@@ -1,0 +1,6 @@
+The CI/CD configuration was fixed to allow publishing
+to PyPI and other targets disregarding the test stage
+outcome. This used to be a bug in the workflow definition
+that has now been fixed.
+
+-- by :user:`pbrezina` and :user:`webknjaz`
