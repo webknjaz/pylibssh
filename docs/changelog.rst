@@ -10,6 +10,9 @@ versions with advance notice in the **Deprecations** section of releases.
 
 .. only:: not is_release
 
+   To be included in v\ |release| (if present)
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
    .. towncrier-draft-entries:: |release| [UNRELEASED DRAFT]
 
    Released versions
