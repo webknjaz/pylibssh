@@ -1389,6 +1389,8 @@ jobs:
         ${{ needs.pre-setup.outputs.sdist-artifact-name }}
       dists-artifact-name: >-
         ${{ needs.pre-setup.outputs.dists-artifact-name }}
+    secrets:
+      codecov-token: ${{ secrets.CODECOV_TOKEN }}
 
   test-macos:
     name: 🧪 Test${{ '' }}  # nest jobs under the same sidebar category
@@ -1428,6 +1430,8 @@ jobs:
         ${{ needs.pre-setup.outputs.sdist-artifact-name }}
       dists-artifact-name: >-
         ${{ needs.pre-setup.outputs.dists-artifact-name }}
+    secrets:
+      codecov-token: ${{ secrets.CODECOV_TOKEN }}
 
   dist-meta:
     name: Verify 🐍📦 metadata
