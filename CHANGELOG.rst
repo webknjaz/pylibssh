@@ -14,6 +14,280 @@ Changelog
 
 .. towncrier release notes start
 
+v1.2.0
+======
+
+*(2024-06-07)*
+
+
+Bug fixes
+---------
+
+- |project| no longer crashes when received EOF or when channel is not explicitly
+  closed -- by :user:`pbrezina`.
+
+  Previously, |project| crashed if ``channel.recv`` was called and ``libssh``
+  returned ``SSH_EOF`` error. It also crashed on some special occasions where
+  channel was not explicitly closed and the session object was garbage-collected
+  first.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`576`.
+
+
+Features
+--------
+
+- Started exposing the ``SSH_OPTIONS_PUBLICKEY_ACCEPTED_TYPES``
+  and ``SSH_OPTIONS_HOSTKEYS`` options publicly
+  -- by :user:`Qalthos`.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`527`.
+
+- The ``request_exec()`` method was added to the ``Channel`` class. It exposes an
+  interface for calling the respective low-level C-API of the underlying
+  ``libssh`` library -- by :user:`pbrezina`.
+
+  Additionally, the following calls to ``libssh`` are now available in the same
+  class: ``request_exec()``, ``send_eof()``, ``request_send_signal()`` and
+  ``is_eof`` which is exposed as a :py:class:`property`.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`576`.
+
+
+Improved documentation
+----------------------
+
+- Fixed spelling of "Connect" in the ``Session.connect()``
+  docstring -- by :user:`donnerhacke`.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`474`.
+
+- Added a tip to the :ref:`installation guide <Installing |project|>`
+  on how to set compiler flags when installing from source
+  -- :user:`webknjaz`.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`499`.
+
+- Fixed the example of invoking remote commands by using
+  ``Channel.exec_command()`` in snippets -- by :user:`pbrezina`.
+
+  Its previously showcased version wasn't functional.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`576`.
+
+
+Packaging updates and notes for downstreams
+-------------------------------------------
+
+- A flaw in the logic for copying the project directory into a
+  temporary folder that led to infinite recursion when :envvar:`TMPDIR`
+  was set to a project subdirectory path. This was happening in Fedora
+  and its downstream due to the use of `pyproject-rpm-macros
+  <https://src.fedoraproject.org/rpms/pyproject-rpm-macros>`__. It was
+  only reproducible with ``pip wheel`` and was not affecting the
+  ``pyproject-build`` users.
+
+  -- by :user:`hroncok` and :user:`webknjaz`
+
+  *Related commits on GitHub:*
+  :commit:`89c9b3a`.
+
+- From now on, the published distribution package artifacts
+  for the new releases are signed via `Sigstore
+  <https://sigstore.dev>`__ -- by :user:`webknjaz.`
+
+  This is happening as a part of the GitHub Actions CI/CD
+  workflow automation and the signatures are uploaded to
+  the corresponding GitHub Release pages.
+
+  *Related commits on GitHub:*
+  :commit:`986988a`.
+
+- The platform-specific macOS wheels are now built using the
+  Python interpreter from https://python.org. They are tagged
+  with ``macosx_10_9`` -- by :user:`webknjaz`.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`333`.
+
+- The ``toml`` build time dependency has been replaced with
+  ``tomli`` -- by :user:`webknjaz`.
+
+  The ``tomli`` distribution is only pulled in under Python
+  versions below 3.11. On 3.11 and higher, the standard
+  library module :py:mod:`tomllib` is now used instead.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`501`.
+
+- Started using the built-in ``setuptools-scm`` Git archive
+  support under Python 3.7 and higher -- :user:`webknjaz`.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`502`.
+
+- Added support for Python 3.12 -- by :user:`Qalthos`.
+
+  It is now both tested in the CI and is advertised through
+  the Trove classifiers.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`532`.
+
+- The ``Cython`` build time dependency now has the minimum
+  version of 3.0 under Python 3.12 and higher
+  -- by :user:`webknjaz`.
+
+  The previous versions of ``Cython`` are still able to build
+  the project under older Python versions.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`540`.
+
+- :pep:`660` is now enabled -- :user:`webknjaz`.
+
+  Previously, due to restrictive :pep:`517` hook reimports,
+  our in-tree build backend was losing :pep:`non-PEP 517 <517>`
+  hooks implemented in newer versions of ``setuptools`` but not
+  the earlier ones. This is now addressed by reexporting
+  everything that ``setuptools`` exposes with a wildcard.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`541`.
+
+- The ``setuptools-scm`` build dependency CI pin was updated to 8.1.0 —
+  this version fixes a date parsing incompatibility introduced by Git 2.45.0
+  (:gh:`pypa/setuptools_scm#1039 <pypa/setuptools_scm/issues/1038>`,
+  :gh:`pypa/setuptools_scm#1038 <pypa/setuptools_scm/pull/1039>`)
+  -- by :user:`webknjaz`.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`601`.
+
+
+Contributor-facing changes
+--------------------------
+
+- The :doc:`changelog` page for the tagged release builds on
+  Read The Docs does not attempt showing the draft section
+  anymore -- by :user:`webknjaz`.
+
+  *Related commits on GitHub:*
+  :commit:`852d259`.
+
+- Adjusted the publishing workflow automation to pre-configure
+  Git before attempting to create a tag when building a
+  source distribution -- by :user:`webknjaz`.
+
+  *Related commits on GitHub:*
+  :commit:`f07296f`.
+
+- The CI configuration for building the macOS platform-specific
+  wheels switched to using ``cibuildwheel`` -- by :user:`webknjaz`.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`333`.
+
+- The OS-level tox package was upgraded to v3.28.0 in the UBI9
+  CI runtime -- by :user:`Qalthos`.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`461`, :issue:`473`.
+
+- Fixed spelling of "Connect" in the ``Session.connect()``
+  docstring -- by :user:`donnerhacke`.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`474`.
+
+- The Packit CI access to the internet has been restored
+  -- by :user:`Qalthos`.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`507`.
+
+- Started building ``manylinux_2_28`` base images for testing and
+  packaging in the CI/CD infrastructure -- by :user:`Qalthos`.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`533`.
+
+- Switched back to using Cython's native plugin for measuring
+  code coverage -- by :user:`webknjaz`.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`538`.
+
+- Added separate changelog fragment types for contributor-
+  and downstream-facing patches -- by :user:`webknjaz`.
+
+  Their corresponding identifiers are ``contrib`` and ``packaging``
+  respectively. They are meant to be used for more accurate
+  classification, where one would resort to using ``misc`` otherwise.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`539`.
+
+- :pep:`660` is now enabled -- :user:`webknjaz`.
+
+  This effectively means that the ecosystem-native editable
+  install mode started working properly.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`541`.
+
+- The duplicated jobs matrices for building manylinux wheels
+  now reside in a single GitHub Actions CI/CD reusable
+  workflow definition.
+
+  -- :user:`webknjaz`
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`559`.
+
+- The duplicated jobs matrices of the text jobs now reside in
+  a single GitHub Actions CI/CD reusable workflow definition.
+
+  -- :user:`webknjaz`
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`560`.
+
+- Fixed the location of release workflow in the
+  :ref:`Release Guide` document -- by :user:`Qalthos`.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`565`.
+
+- The ``setuptools-scm`` build dependency CI pin was updated to 8.1.0 —
+  this version fixes a date parsing incompatibility introduced by Git 2.45.0
+  (:gh:`pypa/setuptools_scm#1039 <pypa/setuptools_scm/issues/1038>`,
+  :gh:`pypa/setuptools_scm#1038 <pypa/setuptools_scm/pull/1039>`)
+  -- by :user:`webknjaz`.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`601`.
+
+- The CI/CD configuration was fixed to allow publishing
+  to PyPI and other targets disregarding the test stage
+  outcome. This used to be a bug in the workflow definition
+  that has now been fixed.
+
+  -- by :user:`pbrezina` and :user:`webknjaz`
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`602`.
+
+
+----
+
+
 v1.1.0 (2022-12-05)
 ===================
 
