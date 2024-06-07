@@ -1,6 +1,6 @@
-*********
+=========
 Changelog
-*********
+=========
 
 Versions follow `Semantic Versioning`_ (``<major>.<minor>.<patch>``).
 Backward incompatible (breaking) changes will only be introduced in major
