@@ -1,0 +1,3 @@
+The CI/CD automation has been fixed to include changelog
+updates into source distribution tarballs
+-- by :user:`webknjaz`.
