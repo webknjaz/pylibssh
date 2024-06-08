@@ -1759,7 +1759,7 @@ jobs:
       run: git log -2 --color --patch
 
     - name: Log current Git status
-      run: git status --color
+      run: git status --verbose
 
     - name: >-
         Push ${{ needs.pre-setup.outputs.git-tag }} tag corresponding
