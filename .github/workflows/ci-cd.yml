@@ -1266,7 +1266,11 @@ jobs:
           && '1.9.0-3'
           || '1.7.1-1'
         }}${{ steps.distribution-meta.outputs.dist-tag }}.noarch.rpm
-        https://rpmfind.net/linux/${{
+        https://${{
+          matrix.target-container.tag == 'centos/centos:stream8'
+          && 'vault.centos.org'
+          || 'rpmfind.net/linux'
+        }}/${{
           contains(matrix.target-container.tag, 'ubi9')
           && 'epel'
           || 'centos'
