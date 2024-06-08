@@ -1,3 +1,0 @@
-The automation now replaces the "project" RST substitution
-in the long description and GitHub Discussions/Releases
--- by :user:`webknjaz`.

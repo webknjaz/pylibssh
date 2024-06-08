@@ -14,6 +14,33 @@ Changelog
 
 .. towncrier release notes start
 
+v1.2.0.post2
+============
+
+*(2024-06-08)*
+
+
+Packaging updates and notes for downstreams
+-------------------------------------------
+
+- The automation now replaces the "project" RST substitution
+  in the long description and GitHub Discussions/Releases
+  -- by :user:`webknjaz`.
+
+  *Related commits on GitHub:*
+  :commit:`13374a71`.
+
+- The CI/CD automation has been fixed to include changelog
+  updates into source distribution tarballs
+  -- by :user:`webknjaz`.
+
+  *Related commits on GitHub:*
+  :commit:`627f718d`.
+
+
+----
+
+
 v1.2.0
 ======
 
