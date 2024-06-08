@@ -1267,7 +1267,7 @@ jobs:
           || '1.7.1-1'
         }}${{ steps.distribution-meta.outputs.dist-tag }}.noarch.rpm
         https://${{
-          matrix.target-container.tag == 'centos/centos:stream8'
+          contains(matrix.target-container.tag, '8')
           && 'vault.centos.org'
           || 'rpmfind.net/linux'
         }}/${{
