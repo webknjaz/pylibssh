@@ -1751,6 +1751,12 @@ jobs:
         }}'
         '${{ needs.pre-setup.outputs.git-tag }}'
 
+    - name: Log two last commits
+      run: git log -2 --color --patch
+
+    - name: Log current Git status
+      run: git status --color
+
     - name: >-
         Push ${{ needs.pre-setup.outputs.git-tag }} tag corresponding
         to the just published release back to GitHub
