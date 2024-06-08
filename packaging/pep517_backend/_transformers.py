@@ -92,6 +92,9 @@ def sanitize_rst_roles(rst_source_text: str) -> str:  # noqa: WPS210
     """
     substitution_pattern = r'``\g<rendered_text>``'
 
+    project_substitution_regex = '|project|'
+    project_substitution_pattern = 'ansible-pylibssh'
+
     substitutions = (
         (pep_role_regex, pep_substitution_pattern),
         (user_role_regex, user_substitution_pattern),
@@ -101,6 +104,7 @@ def sanitize_rst_roles(rst_source_text: str) -> str:  # noqa: WPS210
         (gh_role_regex, gh_substitution_pattern),
         (meth_role_regex, meth_substitution_pattern),
         (role_regex, substitution_pattern),
+        (project_substitution_regex, project_substitution_pattern),
     )
 
     rst_source_normalized_text = rst_source_text
