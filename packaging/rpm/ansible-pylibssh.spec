@@ -144,7 +144,7 @@ PYTHONPATH="$(pwd)/bin" \
 PYTHONPATH="$(pwd)/bin" \
 %{__python3} -m pip install --no-deps -t bin %{SOURCE5}
 PYTHONPATH="$(pwd)/bin" \
-%{__python3} -m pip install --no-deps -t bin %{SOURCE6}
+%{__python3} -m pip install --no-deps -t bin %{SOURCE6} --no-build-isolation
 PYTHONPATH="$(pwd)/bin" \
 %{__python3} -m pip install --no-deps -t bin %{SOURCE7}
 PYTHONPATH="$(pwd)/bin" \
