@@ -1,0 +1,3 @@
+The RPM specification now opts out of demanding that the
+compiled C-extensions have a Build ID present under EL 8
+-- by :user:`webknjaz`.
