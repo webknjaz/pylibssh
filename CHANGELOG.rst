@@ -127,7 +127,7 @@ Packaging updates and notes for downstreams
 
 - From now on, the published distribution package artifacts
   for the new releases are signed via `Sigstore
-  <https://sigstore.dev>`__ -- by :user:`webknjaz.`
+  <https://sigstore.dev>`__ -- by :user:`webknjaz`.
 
   This is happening as a part of the GitHub Actions CI/CD
   workflow automation and the signatures are uploaded to
