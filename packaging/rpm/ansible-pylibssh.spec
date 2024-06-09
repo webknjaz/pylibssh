@@ -17,6 +17,15 @@
 
 %global buildroot_site_packages "%{buildroot}%{python3_sitearch}"
 
+%if 0%{?with_debug}
+%global _dwz_low_mem_die_limit 0
+%else
+%if 0%{?rhel} == 8
+# Prevent requiring a Build ID in the compiled shared objects
+%global debug_package   %{nil}
+%endif
+%endif
+
 Name:    python-%{pypi_name}
 Version: %{upstream_version}
 Release: 1%{?dist}
