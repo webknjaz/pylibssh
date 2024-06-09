@@ -1,6 +1,0 @@
-The in-tree :pep:`517` build backend's regular expression
-has been hotfixed to replace the "project" substitution
-correctly -- by :user:`webknjaz`.
-
-Previously, it was generating a lot of noise instead of a
-nice description. But not anymore.

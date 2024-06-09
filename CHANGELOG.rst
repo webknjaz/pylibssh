@@ -14,6 +14,36 @@ Changelog
 
 .. towncrier release notes start
 
+v1.2.0.post4
+============
+
+*(2024-06-09)*
+
+
+Packaging updates and notes for downstreams
+-------------------------------------------
+
+- Substituting the ``gh`` role in source distribution long
+  description has been simplify to stop attempting to make
+  URLs to arbitrary GitHub addresses -- by :user:`webknjaz`.
+
+  *Related commits on GitHub:*
+  :commit:`f4ad1b76`.
+
+- The in-tree :pep:`517` build backend's regular expression
+  has been hotfixed to replace the "project" substitution
+  correctly -- by :user:`webknjaz`.
+
+  Previously, it was generating a lot of noise instead of a
+  nice description. But not anymore.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`92752210`.
+
+
+----
+
+
 v1.2.0.post2
 ============
 
