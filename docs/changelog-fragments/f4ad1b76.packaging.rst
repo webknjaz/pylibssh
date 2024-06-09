@@ -1,3 +1,0 @@
-Substituting the ``gh`` role in source distribution long
-description has been simplify to stop attempting to make
-URLs to arbitrary GitHub addresses -- by :user:`webknjaz`.
