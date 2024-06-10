@@ -1,0 +1,2 @@
+The RPM definition now runs import self-checks when it is
+built for Fedora Linux -- by :user:`webknjaz`.
