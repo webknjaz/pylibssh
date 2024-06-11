@@ -1102,9 +1102,9 @@ jobs:
           matrix.target-container.tag
         }}
 
-    continue-on-error: >-
+    continue-on-error: >-  # Stub for in-matrix "allowed-failures"
       ${{
-        contains(matrix.target-container.tag, 'ubi9')
+        contains(matrix.target-container.tag, '--DISABLED--')
         && true
         || false
       }}
