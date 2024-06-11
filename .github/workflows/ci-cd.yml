@@ -1084,6 +1084,8 @@ jobs:
           registry: registry.access.redhat.com
         - tag: ubi9/ubi:9.3
           registry: registry.access.redhat.com
+        - tag: ubi9/ubi:9.4
+          registry: registry.access.redhat.com
 
     runs-on: ubuntu-latest
     container:
