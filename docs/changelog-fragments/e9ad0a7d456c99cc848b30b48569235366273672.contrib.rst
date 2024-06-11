@@ -1,0 +1,2 @@
+RPM builds are now also tested against UBI 9.4 in CI
+-- by :user:`webknjaz`.
