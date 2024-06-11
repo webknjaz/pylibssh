@@ -233,6 +233,7 @@ sed \
 export PYTHONPATH="%{buildroot_site_packages}:${PYTHONPATH}"
 # Fedora:
 %if "%{?fedora:SET}" == "SET"
+%pyproject_check_import
 %tox -e just-pytest -- \
   -- \
   --deselect tests/unit/scp_test.py::test_get \
