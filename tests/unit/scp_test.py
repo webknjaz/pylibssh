@@ -3,6 +3,7 @@
 """Tests suite for scp."""
 
 import os
+import random
 import uuid
 
 import pytest
@@ -89,3 +90,31 @@ def test_get_existing_local(pre_existing_file_path, src_path, ssh_scp, transmit_
     """Check that SCP file download works and overwrites local file if it exists."""
     ssh_scp.get(str(src_path), str(pre_existing_file_path))
     assert pre_existing_file_path.read_bytes() == transmit_payload
+
+
+@pytest.fixture
+def large_payload():
+    """Generate a large test payload."""
+    # buffer of random 1024 bytes -- just printable ones for easier debugging
+    rands = []
+    for _ in range(1024):
+        rnd = chr(random.randint(ord(' '), ord('~')))
+        rands.append(rnd)
+    rand = ''.join(rands)
+    # .. repeated 65 times
+    repeat = 65
+    return ''.join(rand for _ in range(repeat)).encode()
+
+
+@pytest.fixture
+def src_path_large(tmp_path, large_payload):
+    """Return a remote path that is a file larger than 64k B, which is the most libssh can read at once."""
+    path = tmp_path / 'large.txt'
+    path.write_bytes(large_payload)
+    return path
+
+
+def test_get_large(dst_path, src_path_large, ssh_scp, large_payload):
+    """Check that SCP file download gets over 64kB of data."""
+    ssh_scp.get(str(src_path_large), str(dst_path))
+    assert dst_path.read_bytes() == large_payload
