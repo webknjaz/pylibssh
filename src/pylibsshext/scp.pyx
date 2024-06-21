@@ -24,6 +24,9 @@ from pylibsshext.errors cimport LibsshSCPException
 from pylibsshext.session cimport get_libssh_session
 
 
+SCP_MAX_CHUNK = 65536
+
+
 cdef class SCP:
     def __cinit__(self, session):
         self.session = session
@@ -122,7 +125,9 @@ cdef class SCP:
             size = libssh.ssh_scp_request_get_size(scp)
             mode = libssh.ssh_scp_request_get_permissions(scp)
 
-            read_buffer = <char *>PyMem_Malloc(size)
+            # cap the buffer size to reasonable number -- libssh will not return the whole data at once anyway
+            read_buffer_size = min(size, SCP_MAX_CHUNK)
+            read_buffer = <char *>PyMem_Malloc(read_buffer_size)
             if read_buffer is NULL:
                 raise LibsshSCPException("Memory allocation error")
 
@@ -131,14 +136,17 @@ cdef class SCP:
             if rc == libssh.SSH_ERROR:
                 raise LibsshSCPException("Failed to start read request: %s" % self._get_ssh_error_str())
 
-            # Read the file
-            rc = libssh.ssh_scp_read(scp, read_buffer, size)
-            if rc == libssh.SSH_ERROR:
-                raise LibsshSCPException("Error receiving file data: %s" % self._get_ssh_error_str())
-
-            py_file_bytes = read_buffer[:size]
+            remaining_bytes_to_read = size
             with open(local_file, "wb") as f:
-                f.write(py_file_bytes)
+                while remaining_bytes_to_read > 0:
+                    requested_read_bytes = min(remaining_bytes_to_read, read_buffer_size)
+                    read_bytes = libssh.ssh_scp_read(scp, read_buffer, requested_read_bytes)
+                    if read_bytes == libssh.SSH_ERROR:
+                        raise LibsshSCPException("Error receiving file data: %s" % self._get_ssh_error_str())
+
+                    py_file_bytes = read_buffer[:read_bytes]
+                    f.write(py_file_bytes)
+                    remaining_bytes_to_read -= read_bytes
             if mode >= 0:
                 os.chmod(local_file, mode)
 
