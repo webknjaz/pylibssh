@@ -62,15 +62,15 @@ def test_get(dst_path, src_path, ssh_scp, transmit_payload):
 
 
 @pytest.fixture
-def src_path_missing(tmp_path):
+def path_to_non_existent_src_file(tmp_path):
     """Return a remote path that does not exist."""
     path = tmp_path / 'non-existing.txt'
     assert not path.exists()
     return path
 
 
-def test_get_missing_src(dst_path, src_path_missing, ssh_scp):
+def test_get_missing_src(dst_path, path_to_non_existent_src_file, ssh_scp):
     """Check that SCP file download raises exception if the remote file is missing."""
     error_msg = '^Error receiving information about file:'
     with pytest.raises(LibsshSCPException, match=error_msg):
-        ssh_scp.get(str(src_path_missing), str(dst_path))
+        ssh_scp.get(str(path_to_non_existent_src_file), str(dst_path))
