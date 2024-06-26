@@ -70,7 +70,7 @@ def path_to_non_existent_src_file(tmp_path):
     return path
 
 
-def test_get_missing_src(path_to_non_existent_src_file, ssh_scp):
+def test_copy_from_non_existent_remote_path(path_to_non_existent_src_file, ssh_scp):
     """Check that SCP file download raises exception if the remote file is missing."""
     error_msg = '^Error receiving information about file:'
     with pytest.raises(LibsshSCPException, match=error_msg):
