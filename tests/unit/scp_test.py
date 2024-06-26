@@ -105,7 +105,12 @@ def large_payload():
 
 @pytest.fixture
 def src_path_large(tmp_path, large_payload):
-    """Return a remote path that is a file larger than 64k B, which is the most libssh can read at once."""
+    """Return a remote path that to a 65537 byte-sized file.
+
+    Typical single-read chunk size is 64kB in ``libssh`` so
+    the test needs a file that would overflow that to trigger
+    the read loop.
+    """
     path = tmp_path / 'large.txt'
     path.write_bytes(large_payload)
     return path
