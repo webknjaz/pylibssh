@@ -4,6 +4,7 @@
 
 import os
 import random
+import string
 import uuid
 
 import pytest
@@ -94,16 +95,12 @@ def test_get_existing_local(pre_existing_file_path, src_path, ssh_scp, transmit_
 
 @pytest.fixture
 def large_payload():
-    """Generate a large test payload."""
-    # buffer of random 1024 bytes -- just printable ones for easier debugging
-    rands = []
-    for _ in range(1024):
-        rnd = chr(random.randint(ord(' '), ord('~')))
-        rands.append(rnd)
-    rand = ''.join(rands)
-    # .. repeated 65 times
-    repeat = 65
-    return ''.join(rand for _ in range(repeat)).encode()
+    """Generate a large 65537 byte (64kB+1B) test payload."""
+    random_char_kilobyte = [ord(random.choice(string.printable)) for _ in range(1024)]
+    full_bytes_number = 64
+    a_64kB_chunk = bytes(random_char_kilobyte * full_bytes_number)
+    the_last_byte = random.choice(random_char_kilobyte).to_bytes(length=1, byteorder='big')
+    return a_64kB_chunk + the_last_byte
 
 
 @pytest.fixture
