@@ -1,1 +1,0 @@
-Downloading files larger than 64kB over SCP no longer fails -- by :user:`Jakuje`.
