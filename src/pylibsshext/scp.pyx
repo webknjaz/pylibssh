@@ -96,7 +96,7 @@ cdef class SCP:
         :param local_file: The path on the local host where the file should be placed
         :type local_file: str
         """
-        cdef char *read_buffer
+        cdef char *read_buffer = NULL
 
         remote_file_b = remote_file
         if isinstance(remote_file_b, unicode):

@@ -2,9 +2,12 @@
 
 """Tests suite for scp."""
 
+import os
 import uuid
 
 import pytest
+
+from pylibsshext.errors import LibsshSCPException
 
 
 @pytest.fixture
@@ -57,3 +60,18 @@ def test_get(dst_path, src_path, ssh_scp, transmit_payload):
     """Check that SCP file download works."""
     ssh_scp.get(str(src_path), str(dst_path))
     assert dst_path.read_bytes() == transmit_payload
+
+
+@pytest.fixture
+def path_to_non_existent_src_file(tmp_path):
+    """Return a remote path that does not exist."""
+    path = tmp_path / 'non-existing.txt'
+    assert not path.exists()
+    return path
+
+
+def test_copy_from_non_existent_remote_path(path_to_non_existent_src_file, ssh_scp):
+    """Check that SCP file download raises exception if the remote file is missing."""
+    error_msg = '^Error receiving information about file:'
+    with pytest.raises(LibsshSCPException, match=error_msg):
+        ssh_scp.get(str(path_to_non_existent_src_file), os.devnull)
