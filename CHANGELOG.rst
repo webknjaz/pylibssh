@@ -14,6 +14,24 @@ Changelog
 
 .. towncrier release notes start
 
+v1.2.2
+======
+
+*(2024-06-27)*
+
+
+Bug fixes
+---------
+
+- Downloading files larger than 64kB over SCP no longer fails -- by :user:`Jakuje`.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`621`.
+
+
+----
+
+
 v1.2.1
 ======
 
