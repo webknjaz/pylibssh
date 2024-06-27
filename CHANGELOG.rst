@@ -14,6 +14,59 @@ Changelog
 
 .. towncrier release notes start
 
+v1.2.1
+======
+
+*(2024-06-27)*
+
+
+Bug fixes
+---------
+
+- Downloading non-existent remote files via SCP no longer crashes the program -- by :user:`Jakuje`.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`208`, :issue:`325`, :issue:`620`.
+
+
+Packaging updates and notes for downstreams
+-------------------------------------------
+
+- The RPM specification now opts out of demanding that the
+  compiled C-extensions have a Build ID present under EL
+  -- by :user:`webknjaz`.
+
+  *Related commits on GitHub:*
+  :commit:`9053c1008bb169c8e362a92782d46c7c0d3b1c06`, :commit:`aaa12159b5cdda763a83dcf4ee920510cad83463`.
+
+- The RPM specification has been updated to pre-build the
+  vendored copy of ``setuptools-scm`` with the isolation
+  disabled, addressing the build problem in EL 9
+  -- by :user:`webknjaz`.
+
+  *Related commits on GitHub:*
+  :commit:`dd85ddefafde8f22ab0239add18a1db9ef789b50`.
+
+- The RPM definition now runs import self-checks when it is
+  built for Fedora Linux -- by :user:`webknjaz`.
+
+  *Related issues and pull requests on GitHub:*
+  :issue:`615`.
+
+
+Contributor-facing changes
+--------------------------
+
+- RPM builds are now also tested against UBI 9.4 in CI
+  -- by :user:`webknjaz`.
+
+  *Related commits on GitHub:*
+  :commit:`e9ad0a7d456c99cc848b30b48569235366273672`.
+
+
+----
+
+
 v1.2.0.post4
 ============
 

@@ -1,1 +1,0 @@
-Downloading non-existent remote files via SCP no longer crashes the program -- by :user:`Jakuje`.
