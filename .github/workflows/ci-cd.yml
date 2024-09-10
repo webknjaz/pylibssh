@@ -118,10 +118,13 @@ jobs:
 
   pre-setup:
     name: ⚙️ Pre-set global build settings
+
     runs-on: ubuntu-latest
+
     defaults:
       run:
         shell: python
+
     outputs:
       # NOTE: These aren't env vars because the `${{ env }}` context is
       # NOTE: inaccessible when passing inputs to reusable workflows.
