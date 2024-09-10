@@ -5,6 +5,8 @@ count = true
 
 # Don't even try to analyze these:
 extend-exclude =
+  # Circle CI configs
+  .circleci,
   # No need to traverse egg info dir
   *.egg-info,
   # GitHub configs
@@ -15,6 +17,8 @@ extend-exclude =
   .pytest_cache,
   # Temp dir of pytest-testmon
   .tmontmp,
+  # Countless third-party libs in venvs
+  .tox,
   # Occasional virtualenv dir
   .venv,
   # VS Code
