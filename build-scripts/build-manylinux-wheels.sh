@@ -131,7 +131,7 @@ export CFLAGS="'-I${STATIC_DEPS_PREFIX}/include'"
 for PY in $PYTHONS; do
     PIP_BIN="/opt/python/${PY}/bin/pip"
     >&2 echo Using "${PIP_BIN}"...
-    ${PIP_BIN} install -U 'pip >= 20' setuptools wheel ${PIP_GLOBAL_ARGS}
+    ${PIP_BIN} install -U 'pip >= 20' wheel ${PIP_GLOBAL_ARGS}
     ${PIP_BIN} wheel "${ISOLATED_SRC_DIRS}/${PY}" -w "${ORIG_WHEEL_DIR}" ${PIP_GLOBAL_ARGS}
 done
 
