@@ -513,7 +513,7 @@ jobs:
       # Refs:
       # * https://github.community/t/github-actions-bot-email-address/17204/6
       # * https://github.com/actions/checkout/issues/13#issuecomment-724415212
-      uses: fregante/setup-git-user@v2.0.1
+      uses: fregante/setup-git-user@v2
 
     - name: Generate changelog draft to a temporary file
       run: >-
@@ -1724,7 +1724,7 @@ jobs:
       # Refs:
       # * https://github.community/t/github-actions-bot-email-address/17204/6
       # * https://github.com/actions/checkout/issues/13#issuecomment-724415212
-      uses: fregante/setup-git-user@v2.0.1
+      uses: fregante/setup-git-user@v2
     - name: Fetch the GHA artifact with the version patch
       if: steps.existing-remote-tag-check.outputs.already-exists != 'true'
       uses: actions/download-artifact@v3
@@ -1910,7 +1910,7 @@ jobs:
         Publish a GitHub Release for
         ${{ needs.pre-setup.outputs.git-tag }}
         with Sigstore-signed artifacts
-      uses: ncipollo/release-action@v1.14.0
+      uses: ncipollo/release-action@v1
       with:
         allowUpdates: false
         artifactErrorsFailBuild: false
