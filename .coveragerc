@@ -13,7 +13,7 @@ source =
   *\Lib\site-packages
 
 [report]
-exclude_lines =
+exclude_also =
     \#\s*pragma: no cover
     ^\s*raise AssertionError\b
     ^\s*raise NotImplementedError\b
