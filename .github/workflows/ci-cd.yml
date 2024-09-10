@@ -1582,7 +1582,9 @@ jobs:
         jobs: ${{ toJSON(needs) }}
 
   publish-pypi:
-    name: Publish 🐍📦 ${{ needs.pre-setup.outputs.git-tag }} to PyPI
+    name: >-
+      📦
+      Publish ${{ needs.pre-setup.outputs.git-tag }} to PyPI
     needs:
     - check
     - pre-setup  # transitive, for accessing settings
@@ -1614,7 +1616,9 @@ jobs:
       uses: pypa/gh-action-pypi-publish@release/v1
 
   publish-testpypi:
-    name: Publish 🐍📦 ${{ needs.pre-setup.outputs.git-tag }} to TestPyPI
+    name: >-
+      📦
+      Publish ${{ needs.pre-setup.outputs.git-tag }} to TestPyPI
     needs:
     - check
     - pre-setup  # transitive, for accessing settings
