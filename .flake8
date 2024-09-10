@@ -95,6 +95,10 @@ per-file-ignores =
   # and finally it's impossible to have <= members in tests (WPS202):
   tests/**.py: S101, S404, S603, WPS202, WPS442
 
+
+# Count the number of occurrences of each error/warning code and print a report:
+statistics = true
+
 # flake8-pytest-style
 # PT001:
 pytest-fixture-no-parentheses = true
