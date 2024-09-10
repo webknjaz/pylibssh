@@ -5,10 +5,12 @@ skip_covered = false
 
 [paths]
 source =
-  src/pylibsshext
-  */lib/pypy*/site-packages/pylibsshext
-  */lib/python*/site-packages/pylibsshext
-  */Lib/site-packages/pylibsshext
+  src
+  */src
+  *\src
+  */lib/python*/site-packages
+  */pypy*/site-packages
+  *\Lib\site-packages
 
 [report]
 exclude_lines =
