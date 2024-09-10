@@ -417,7 +417,7 @@ jobs:
       👷📝 ${{ needs.pre-setup.outputs.git-tag }} changelog
       [mode: ${{
         fromJSON(needs.pre-setup.outputs.is-untagged-devel)
-        && 'nightly' || ''
+        && 'test' || ''
       }}${{
         fromJSON(needs.pre-setup.outputs.release-requested)
         && 'release' || ''
@@ -425,7 +425,7 @@ jobs:
         (
           !fromJSON(needs.pre-setup.outputs.is-untagged-devel)
           && !fromJSON(needs.pre-setup.outputs.release-requested)
-        ) && 'test' || ''
+        ) && 'nightly' || ''
       }}]
     needs:
     - pre-setup
