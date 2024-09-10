@@ -1609,7 +1609,8 @@ jobs:
     - name: Download all the dists
       uses: actions/download-artifact@v3
       with:
-        name: ${{ needs.pre-setup.outputs.dists-artifact-name }}
+        name: >-
+          ${{ needs.pre-setup.outputs.dists-artifact-name }}
         path: dist/
     - name: >-
         Publish 🐍📦 ${{ needs.pre-setup.outputs.git-tag }} to PyPI
@@ -1646,7 +1647,8 @@ jobs:
     - name: Download all the dists
       uses: actions/download-artifact@v3
       with:
-        name: ${{ needs.pre-setup.outputs.dists-artifact-name }}
+        name: >-
+          ${{ needs.pre-setup.outputs.dists-artifact-name }}
         path: dist/
     - name: >-
         Publish 🐍📦  ${{ needs.pre-setup.outputs.git-tag }} to TestPyPI
