@@ -121,6 +121,8 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    timeout-minutes: 1
+
     defaults:
       run:
         shell: python
@@ -1594,6 +1596,8 @@ jobs:
       && fromJSON(needs.pre-setup.outputs.release-requested)
     runs-on: ubuntu-latest
 
+    timeout-minutes: 2  # docker+network are slow sometimes
+
     environment:
       name: pypi
       url: >-
@@ -1631,6 +1635,8 @@ jobs:
         || fromJSON(needs.pre-setup.outputs.release-requested)
       )
     runs-on: ubuntu-latest
+
+    timeout-minutes: 2  # docker+network are slow sometimes
 
     environment:
       name: testpypi
@@ -1821,6 +1827,8 @@ jobs:
       always()
       && needs.post-release-repo-update.result == 'success'
     runs-on: ubuntu-latest
+
+    timeout-minutes: 3
 
     permissions:
       contents: write
