@@ -29,8 +29,8 @@ show_missing = true
 branch = true
 cover_pylib = false
 plugins =
-  covdefaults
-#   Cython.Coverage
+#   covdefaults
+  Cython.Coverage
 relative_files = true
 source =
   .
