@@ -1197,7 +1197,7 @@ jobs:
         --nodeps
         https://rpmfind.net/linux/centos-stream/"$(
           rpm --eval '%{rhel}'
-        )"-stream/CRB/x86_64/os/Packages/python3-pytest-6.2.2-6${{
+        )"-stream/CRB/x86_64/os/Packages/python3-pytest-6.2.2-4${{
           steps.distribution-meta.outputs.dist-tag
         }}.noarch.rpm
         https://rpmfind.net/linux/centos-stream/"$(
