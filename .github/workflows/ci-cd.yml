@@ -683,20 +683,67 @@ jobs:
       matrix:
         os:
         - ubuntu-latest
+        wheel-tags-to-skip:
+        - >-
+          ${{
+            !fromJSON(needs.pre-setup.outputs.release-requested)
+            && '*_i686
+            *-macosx_universal2
+            *-musllinux_*
+            *-win32
+            *_arm64
+            *_aarch64
+            *_ppc64le
+            *_s390x
+            pp*'
+            || ''
+          }}
+        - >-
+          ${{
+            !fromJSON(needs.pre-setup.outputs.release-requested)
+            && '*_i686
+            *-macosx_universal2
+            *-musllinux_*
+            *-win32
+            *_arm64
+            *_x86_64
+            *_ppc64le
+            *_s390x
+            pp*'
+            || ''
+          }}
+        - >-
+          ${{
+            !fromJSON(needs.pre-setup.outputs.release-requested)
+            && '*_i686
+            *-macosx_universal2
+            *-musllinux_*
+            *-win32
+            *_arm64
+            *_x86_64
+            *_aarch64
+            *_s390x
+            pp*'
+            || ''
+          }}
+        - >-
+          ${{
+            !fromJSON(needs.pre-setup.outputs.release-requested)
+            && '*_i686
+            *-macosx_universal2
+            *-musllinux_*
+            *-win32
+            *_arm64
+            *_x86_64
+            *_aarch64
+            *_ppc64le
+            pp*'
+            || ''
+          }}
     uses: ./.github/workflows/reusable-cibuildwheel.yml
     with:
       os: ${{ matrix.os }}
-      wheel-tags-to-skip: >-
-        ${{
-        !fromJSON(needs.pre-setup.outputs.release-requested)
-        && '*_i686
-        *-macosx_universal2
-        *-musllinux_*
-        *-win32
-        *_arm64
-        pp*'
-        || ''
-        }}
+      wheel-tags-to-skip: ${{ matrix.wheel-tags-to-skip }}
       source-tarball-name: >-
         ${{ needs.pre-setup.outputs.sdist-artifact-name }}
       dists-artifact-name: >-
