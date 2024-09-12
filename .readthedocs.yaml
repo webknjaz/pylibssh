@@ -8,7 +8,7 @@ build:
   os: ubuntu-24.04
   tools:
     python: >-  # has to be parsed as a YAML string
-      3.10
+      3.11
   commands:
   - >-
     PYTHONWARNINGS=error
