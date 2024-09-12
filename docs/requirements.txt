@@ -131,6 +131,10 @@ imagesize==1.4.1 \
     --hash=sha256:0d8d18d08f840c19d0ee7ca1fd82490fdc3729b7ac93f49870406ddde8ef8d8b \
     --hash=sha256:69150444affb9cb0d5cc5a92b3676f0b2fb7cd9ae39e947a5e11a36b4497cd4a
     # via sphinx
+incremental==24.7.2 \
+    --hash=sha256:8cb2c3431530bec48ad70513931a760f446ad6c25e8333ca5d95e24b0ed7b8fe \
+    --hash=sha256:fb4f1d47ee60efe87d4f6f0ebb5f70b9760db2b2574c59c8e8912be4ebd464c9
+    # via towncrier
 jinja2==3.1.4 \
     --hash=sha256:4a3aee7acbbe7303aede8e9648d13b8bf88a429282aa6122a993f0ac800cb369 \
     --hash=sha256:bc5dd2abb727a5319567b7a813e6a2e7318c39f4f487cfe6c89c6f9c7d25197d
@@ -356,9 +360,9 @@ sphinxcontrib-towncrier==0.4.0a0 \
     --hash=sha256:d9b1513fc07781432dd3a0b2ca797cfe0e99e9b5bc5e5c8bf112d5d142afb6dc \
     --hash=sha256:ec734e3d0920e2ce26e99681119f398a9e1fc0aa6c2d7ed1f052f1219dcd4653
     # via -r requirements.in
-towncrier==24.8.0 \
-    --hash=sha256:013423ee7eed102b2f393c287d22d95f66f1a3ea10a4baa82d298001a7f18af3 \
-    --hash=sha256:9343209592b839209cdf28c339ba45792fbfe9775b5f9c177462fd693e127d8d
+towncrier==23.11.0 \
+    --hash=sha256:13937c247e3f8ae20ac44d895cf5f96a60ad46cfdcc1671759530d7837d9ee5d \
+    --hash=sha256:2e519ca619426d189e3c98c99558fe8be50c9ced13ea1fc20a4a353a95d2ded7
     # via sphinxcontrib-towncrier
 urllib3==2.2.3 \
     --hash=sha256:ca899ca043dcb1bafa3e262d73aa25c465bfb49e0bd9dd5d59f1d0acba2f8fac \
@@ -369,4 +373,6 @@ urllib3==2.2.3 \
 setuptools==74.1.2 \
     --hash=sha256:5f4c08aa4d3ebcb57a50c33b1b07e94315d7fc7230f7115e47fc99776c8ce308 \
     --hash=sha256:95b40ed940a1c67eb70fc099094bd6e99c6ee7c23aa2306f4d2697ba7916f9c6
-    # via setuptools-scm
+    # via
+    #   incremental
+    #   setuptools-scm
