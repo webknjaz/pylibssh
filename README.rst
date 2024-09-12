@@ -92,6 +92,18 @@ are set properly:
     # to enable shell script debug mode use
     $ tox -e build-dists-manylinux1-x86_64 -- -e DEBUG=1
 
+Communication
+-------------
+
+Join the Ansible forum:
+
+* `Get Help <https://forum.ansible.com/c/help/6>`_: get help or help others. Please add the appropriate tags if you start new discussions, for example the ``pylibssh`` tag.
+* `Posts tagged with 'pylibssh' <https://forum.ansible.com/tag/pylibssh>`_: subscribe to participate in project-related conversations.
+* `News & Announcements <https://forum.ansible.com/c/news/5>`_: track project-wide announcements including social events and the `Bullhorn newsletter <https://docs.ansible.com/ansible/devel/community/communication.html#the-bullhorn>`_.
+* `Social Spaces <https://forum.ansible.com/c/chat/4>`_: gather and interact with fellow enthusiasts.
+
+For more information about getting in touch with us, see the `Ansible communication guide <https://docs.ansible.com/ansible/devel/community/communication.html>`_.
+
 License
 -------
 
