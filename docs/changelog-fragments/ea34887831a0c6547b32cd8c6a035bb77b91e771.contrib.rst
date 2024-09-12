@@ -1,0 +1,3 @@
+The Git archives are now immutable per the packaging recommendations.
+This allows downstreams safely use GitHub archive URLs when
+re-packaging -- by :user:`webknjaz`.
