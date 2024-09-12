@@ -12,7 +12,7 @@ build:
   commands:
   - >-
     PYTHONWARNINGS=error
-    python -Im venv "${READTHEDOCS_VIRTUALENV_PATH}"
+    python3 -Im venv "${READTHEDOCS_VIRTUALENV_PATH}"
   - >-
     PYTHONWARNINGS=error
     "${READTHEDOCS_VIRTUALENV_PATH}"/bin/python -Im
