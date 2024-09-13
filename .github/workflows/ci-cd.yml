@@ -686,51 +686,51 @@ jobs:
         wheel-tags-to-skip:
         - >-
           ${{
-            !fromJSON(needs.pre-setup.outputs.release-requested)
-            && '*_i686
-            *-macosx_universal2
-            *-musllinux_*
-            *-win32
-            *_arm64
-            *-*linux_{aarch64,ppc64le,s390x}
-            pp*'
-            || ''
+          !fromJSON(needs.pre-setup.outputs.release-requested)
+          && '*_i686
+          *-macosx_universal2
+          *-musllinux_*
+          *-win32
+          *_arm64
+          *-*linux_{aarch64,ppc64le,s390x}
+          pp*'
+          || ''
           }}
         - >-
           ${{
-            !fromJSON(needs.pre-setup.outputs.release-requested)
-            && '*_i686
-            *-macosx_universal2
-            *-musllinux_*
-            *-win32
-            *_arm64
-            *-*linux_{x86_64,ppc64le,s390x}
-            pp*'
-            || ''
+          !fromJSON(needs.pre-setup.outputs.release-requested)
+          && '*_i686
+          *-macosx_universal2
+          *-musllinux_*
+          *-win32
+          *_arm64
+          *-*linux_{x86_64,ppc64le,s390x}
+          pp*'
+          || ''
           }}
         - >-
           ${{
-            !fromJSON(needs.pre-setup.outputs.release-requested)
-            && '*_i686
-            *-macosx_universal2
-            *-musllinux_*
-            *-win32
-            *_arm64
-            *-*linux_{x86_64,aarch64,s390x}
-            pp*'
-            || ''
+          !fromJSON(needs.pre-setup.outputs.release-requested)
+          && '*_i686
+          *-macosx_universal2
+          *-musllinux_*
+          *-win32
+          *_arm64
+          *-*linux_{x86_64,aarch64,s390x}
+          pp*'
+          || ''
           }}
         - >-
           ${{
-            !fromJSON(needs.pre-setup.outputs.release-requested)
-            && '*_i686
-            *-macosx_universal2
-            *-musllinux_*
-            *-win32
-            *_arm64
-            *-*linux_{x86_64,aarch64,ppc64le}
-            pp*'
-            || ''
+          !fromJSON(needs.pre-setup.outputs.release-requested)
+          && '*_i686
+          *-macosx_universal2
+          *-musllinux_*
+          *-win32
+          *_arm64
+          *-*linux_{x86_64,aarch64,ppc64le}
+          pp*'
+          || ''
           }}
     uses: ./.github/workflows/reusable-cibuildwheel.yml
     with:
