@@ -66,11 +66,11 @@ jobs:
         echo "CIBW_ARCHS_LINUX=${{ inputs.qemu }}" >> "${GITHUB_ENV}"
       shell: bash
 
-    # - name: Skip building some wheel tags
-    #   if: inputs.wheel-tags-to-skip
-    #   run: |
-    #     echo "CIBW_SKIP=${{ inputs.wheel-tags-to-skip }}" >> "${GITHUB_ENV}"
-    #   shell: bash
+    - name: Skip building some wheel tags
+      if: inputs.wheel-tags-to-skip
+      run: |
+        echo "CIBW_SKIP=${{ inputs.wheel-tags-to-skip }}" >> "${GITHUB_ENV}"
+      shell: bash
 
     - name: Build wheels
       uses: pypa/cibuildwheel@v2.16.5
