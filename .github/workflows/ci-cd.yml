@@ -692,9 +692,7 @@ jobs:
             *-musllinux_*
             *-win32
             *_arm64
-            *_aarch64
-            *_ppc64le
-            *_s390x
+            *-*linux_{aarch64,ppc64le,s390x}
             pp*'
             || ''
           }}
@@ -706,9 +704,7 @@ jobs:
             *-musllinux_*
             *-win32
             *_arm64
-            *_x86_64
-            *_ppc64le
-            *_s390x
+            *-*linux_{x86_64,ppc64le,s390x}
             pp*'
             || ''
           }}
@@ -720,9 +716,7 @@ jobs:
             *-musllinux_*
             *-win32
             *_arm64
-            *_x86_64
-            *_aarch64
-            *_s390x
+            *-*linux_{x86_64,aarch64,s390x}
             pp*'
             || ''
           }}
@@ -734,9 +728,7 @@ jobs:
             *-musllinux_*
             *-win32
             *_arm64
-            *_x86_64
-            *_aarch64
-            *_ppc64le
+            *-*linux_{x86_64,aarch64,ppc64le}
             pp*'
             || ''
           }}
